@@ -1,6 +1,7 @@
 /target/
 built/
 node_modules/
+workspace/
 package-lock.json
 !.mvn/wrapper/maven-wrapper.jar
 

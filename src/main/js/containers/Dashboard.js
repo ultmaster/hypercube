@@ -1,28 +1,13 @@
-import Typography from "@material-ui/core/Typography";
-import SimpleLineChart from "../components/SimpleLineChart";
-import SimpleTable from "../components/SimpleTable";
-import React from "react";
-import {withStyles} from "@material-ui/core";
-import DashboardForm from "./DashboardForm";
+import React from 'react'
+import { connect } from 'react-redux'
+import Dashboard from '../components/Dashboard';
+import { SET_WORKING_DIR_DIALOG, SetWorkingDir } from "../components/SetWorkingDir";
+import { setWorkingDir, closeModal } from "../actions";
 
-const styles = theme => ({
-    chartContainer: {
-        marginLeft: -22,
-    },
-    tableContainer: {
-        height: 320,
-    }
+const mapStateToProps = state => ({
+  problem: state.problem
+});
+const mapDispatchToProps = dispatch => ({
 });
 
-class Dashboard extends React.Component {
-
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <DashboardForm />
-        );
-    }
-}
-
-export default withStyles(styles)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

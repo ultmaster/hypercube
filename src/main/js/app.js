@@ -7,6 +7,7 @@ import rootReducer from './reducers';
 
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
+import {updateAll} from "./actions";
 
 const loggerMiddleware = createLogger();
 
@@ -23,4 +24,6 @@ render(
         <Index />
     </Provider>,
     document.getElementById('root')
-)
+);
+
+store.dispatch(updateAll());

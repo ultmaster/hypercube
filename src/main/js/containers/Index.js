@@ -20,7 +20,7 @@ import SimpleLineChart from '../components/SimpleLineChart';
 import SimpleTable from '../components/SimpleTable';
 import withRoot from "../withRoot";
 import { BrowserRouter } from 'react-router-dom';
-import Dashboard from "./Dashboard";
+import Dashboard from "../containers/Dashboard";
 import {Route} from "react-router";
 import Tooltip from "@material-ui/core/Tooltip";
 import SetWorkingDir from "../containers/SetWorkingDir";
