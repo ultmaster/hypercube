@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,11 +15,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import FolderIcon from '@material-ui/icons/Folder';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import {mainListItems, secondaryListItems} from './listItems';
 import SimpleLineChart from '../components/SimpleLineChart';
 import SimpleTable from '../components/SimpleTable';
 import withRoot from "../withRoot";
-import { BrowserRouter } from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 import Dashboard from "../containers/Dashboard";
 import {Route} from "react-router";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -115,20 +115,20 @@ class Index extends React.Component {
   };
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
+    this.setState({open: true});
   };
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
+    this.setState({open: false});
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className={classes.root}>
-          <CssBaseline />
+          <CssBaseline/>
           <AppBar
             position="absolute"
             className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
@@ -143,7 +143,7 @@ class Index extends React.Component {
                   this.state.open && classes.menuButtonHidden,
                 )}
               >
-                <MenuIcon />
+                <MenuIcon/>
               </IconButton>
               <Typography
                 component="h1"
@@ -155,18 +155,20 @@ class Index extends React.Component {
                 Dashboard
               </Typography>
               <Tooltip title={`Current working dir: ${this.props.workingDirectory || "Not set"}`}>
-                <IconButton color="inherit" onClick={() => { this.props.dispatch(openModal(SET_WORKING_DIR_DIALOG)) }}>
-                  <FolderIcon />
+                <IconButton color="inherit" onClick={() => {
+                  this.props.dispatch(openModal(SET_WORKING_DIR_DIALOG))
+                }}>
+                  <FolderIcon/>
                 </IconButton>
               </Tooltip>
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
+                  <NotificationsIcon/>
                 </Badge>
               </IconButton>
             </Toolbar>
           </AppBar>
-          <SetWorkingDir />
+          <SetWorkingDir/>
           <Drawer
             variant="permanent"
             classes={{
@@ -176,21 +178,21 @@ class Index extends React.Component {
           >
             <div className={classes.toolbarIcon}>
               <IconButton onClick={this.handleDrawerClose}>
-                <ChevronLeftIcon />
+                <ChevronLeftIcon/>
               </IconButton>
             </div>
-            <Divider />
+            <Divider/>
             <List>{mainListItems}</List>
-            <Divider />
+            <Divider/>
             <List>{secondaryListItems}</List>
           </Drawer>
           <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-            <Route path='/dashboard' component={ Dashboard } />
-            <Route path='/tests' component={ Tests } />
+            <div className={classes.appBarSpacer}/>
+            <Route path='/dashboard' component={Dashboard}/>
+            <Route path='/tests' component={Tests}/>
           </main>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

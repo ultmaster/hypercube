@@ -39,7 +39,7 @@ public class Configuration {
     }
 
     private File getProblemXmlFile() {
-        return new File(this.workingDirectory + "/models.xml");
+        return new File(this.workingDirectory + "/problem.xml");
     }
 
     public void loadOrNew() {

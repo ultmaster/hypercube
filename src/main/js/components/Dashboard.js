@@ -7,43 +7,27 @@ import Checkbox from "@material-ui/core/Checkbox";
 import SetChecker from "../containers/SetChecker";
 import Button from "@material-ui/core/Button";
 
-const styles = theme => ({
-  chartContainer: {
-    marginLeft: -22,
-  },
-  tableContainer: {
-    height: 320,
-  }
-});
-
 class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {...props.problem};
+    this.state = {
+      timeLimit: props.problem.timeLimit,
+      memoryLimit: props.problem.memoryLimit,
+      pointsEnabled: props.problem.pointsEnabled
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  update = (event) => {
-    const path = event.target.name.split('.');
-    const depth = path.length;
-    const oldstate = this.state;
-    const newstate = { ...oldstate };
-    let newStateLevel = newstate;
-    let oldStateLevel = oldstate;
-
-    for (let i = 0; i < depth; i += 1) {
-      if (i === depth - 1) {
-        newStateLevel[path[i]] = event.target.value;
-      } else {
-        newStateLevel[path[i]] = { ...oldStateLevel[path[i]] };
-        oldStateLevel = oldStateLevel[path[i]];
-        newStateLevel = newStateLevel[path[i]];
-      }
-    }
-    this.setState(newstate);
+  handleChange = (event) => {
+    console.log(event.target.name);
+    console.log(event.target.value);
+    this.setState({[event.target.name]: event.target.value});
   };
 
-  handleSave = () => {
+  handleSubmit = () => {
     console.log(this.state);
     this.props.save(this.state);
   };
@@ -55,10 +39,10 @@ class Dashboard extends React.Component {
       <Grid container spacing={24}>
         <Grid item xs={12} md={6}>
           <TextField required
-                     onChange={this.update.bind(this)}
                      name="timeLimit"
                      label="Time limit"
                      helperText="Between 500 ms and 30000 ms"
+                     onChange={this.handleChange.bind(this)}
                      fullWidth
                      type="number"
                      defaultValue={problem.timeLimit}/>
@@ -66,22 +50,18 @@ class Dashboard extends React.Component {
         <Grid item xs={12} md={6}>
           <TextField required
                      name="memoryLimit"
-                     onChange={this.update.bind(this)}
                      label="Memory limit"
                      fullWidth
                      type="number"
                      helperText="Between 4 MB and 2048 MB"
+                     onChange={this.handleChange.bind(this)}
                      defaultValue={problem.memoryLimit}/>
         </Grid>
         <Grid item xs={12} md={6}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="interaction.enabled" value="yes" defaultChecked={problem.interaction.enabled}/>}
-            label="Is problem interactive"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="points.enabled" value="yes" defaultChecked={problem.points.enabled}/>}
+            control={<Checkbox color="secondary" name="pointsEnabled" value={true}
+                               onChange={this.handleChange.bind(this)}
+                               defaultChecked={problem.pointsEnabled}/>}
             label="Points enabled"
           />
         </Grid>
@@ -89,7 +69,7 @@ class Dashboard extends React.Component {
           <SetChecker/>
         </Grid>
         <Grid item xs={12} md={12}>
-          <Button variant="contained" color="primary" onClick={this.handleSave}>
+          <Button variant="contained" color="primary" onClick={this.handleSubmit.bind(this)}>
             Save
           </Button>
         </Grid>
@@ -97,5 +77,14 @@ class Dashboard extends React.Component {
     );
   }
 }
+
+const styles = theme => ({
+  chartContainer: {
+    marginLeft: -22,
+  },
+  tableContainer: {
+    height: 320,
+  }
+});
 
 export default withStyles(styles)(Dashboard);

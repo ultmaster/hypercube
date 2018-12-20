@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @XmlRootElement
 public class Problem {
@@ -11,22 +12,22 @@ public class Problem {
     private Integer timeLimit;
     private Integer memoryLimit;
     private Boolean testsWellFormed;
-    private Interaction interaction;
-    private Program checker;
-    private Program validator;
-    private Points points;
+    private String interactor;
+    private String checker;
+    private String validator;
+    private List<Program> programs;
     private List<Test> tests;
+    private Boolean pointsEnabled;
+    private Boolean groupEnabled;
+    private Map<Integer, Integer> groupDependencies;
+    private List<Integer> groupPoints;
 
-    public Problem() {
+    Problem() {
         hypercubeVersion = 1;
         timeLimit = 1000;
         memoryLimit = 512;
         testsWellFormed = true;
-        points = new Points();
-        interaction = new Interaction();
-        checker = new Program();
-        validator = new Program();
-        points = new Points();
+        pointsEnabled = groupEnabled = false;
         tests = new ArrayList<Test>();
     }
 
@@ -48,6 +49,15 @@ public class Problem {
             this.timeLimit = timeLimit;
     }
 
+    public Integer getMemoryLimit() {
+        return memoryLimit;
+    }
+
+    public void setMemoryLimit(Integer memoryLimit) {
+        if (memoryLimit != null)
+            this.memoryLimit = memoryLimit;
+    }
+
     public Boolean getTestsWellFormed() {
         return testsWellFormed;
     }
@@ -57,48 +67,40 @@ public class Problem {
             this.testsWellFormed = testsWellFormed;
     }
 
-    public Integer getMemoryLimit() {
-        return memoryLimit;
+    public String getInteractor() {
+        return interactor;
     }
 
-    public void setMemoryLimit(Integer memoryLimit) {
-        this.memoryLimit = memoryLimit;
+    public void setInteractor(String interactor) {
+        if (interactor != null)
+            this.interactor = interactor;
     }
 
-    public Boolean isTestsWellFormed() {
-        return testsWellFormed;
-    }
-
-    public Interaction getInteraction() {
-        return interaction;
-    }
-
-    public void setInteraction(Interaction interaction) {
-        this.interaction = interaction;
-    }
-
-    public Program getChecker() {
+    public String getChecker() {
         return checker;
     }
 
-    public void setChecker(Program checker) {
-        this.checker = checker;
+    public void setChecker(String checker) {
+        if (checker != null)
+            this.checker = checker;
     }
 
-    public Program getValidator() {
+    public String getValidator() {
         return validator;
     }
 
-    public void setValidator(Program validator) {
-        this.validator = validator;
+    public void setValidator(String validator) {
+        if (validator != null)
+            this.validator = validator;
     }
 
-    public Points getPoints() {
-        return points;
+    public List<Program> getPrograms() {
+        return programs;
     }
 
-    public void setPoints(Points points) {
-        this.points = points;
+    public void setPrograms(List<Program> programs) {
+        if (programs != null)
+            this.programs = programs;
     }
 
     public List<Test> getTests() {
@@ -106,6 +108,43 @@ public class Problem {
     }
 
     public void setTests(List<Test> tests) {
-        this.tests = tests;
+        if (tests != null)
+            this.tests = tests;
+    }
+
+    public Boolean getPointsEnabled() {
+        return pointsEnabled;
+    }
+
+    public void setPointsEnabled(Boolean pointsEnabled) {
+        if (pointsEnabled != null)
+            this.pointsEnabled = pointsEnabled;
+    }
+
+    public Boolean getGroupEnabled() {
+        return groupEnabled;
+    }
+
+    public void setGroupEnabled(Boolean groupEnabled) {
+        if (groupEnabled != null)
+            this.groupEnabled = groupEnabled;
+    }
+
+    public Map<Integer, Integer> getGroupDependencies() {
+        return groupDependencies;
+    }
+
+    public void setGroupDependencies(Map<Integer, Integer> groupDependencies) {
+        if (groupDependencies != null)
+            this.groupDependencies = groupDependencies;
+    }
+
+    public List<Integer> getGroupPoints() {
+        return groupPoints;
+    }
+
+    public void setGroupPoints(List<Integer> groupPoints) {
+        if (groupPoints != null)
+            this.groupPoints = groupPoints;
     }
 }
