@@ -1,4 +1,4 @@
-package eoj3.hypercube.problem;
+package eoj3.hypercube.models;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -7,10 +7,10 @@ import java.util.List;
 
 @XmlRootElement
 public class Problem {
-    private int hypercubeVersion;
-    private int timeLimit;
-    private int memoryLimit;
-    private boolean testsWellFormed;
+    private Integer hypercubeVersion;
+    private Integer timeLimit;
+    private Integer memoryLimit;
+    private Boolean testsWellFormed;
     private Interaction interaction;
     private Program checker;
     private Program validator;
@@ -31,36 +31,42 @@ public class Problem {
     }
 
     @XmlAttribute
-    public int getHypercubeVersion() {
+    public Integer getHypercubeVersion() {
         return hypercubeVersion;
     }
 
-    public void setHypercubeVersion(int hypercubeVersion) {
+    public void setHypercubeVersion(Integer hypercubeVersion) {
         this.hypercubeVersion = hypercubeVersion;
     }
 
-    public int getTimeLimit() {
+    public Integer getTimeLimit() {
         return timeLimit;
     }
 
-    public void setTimeLimit(int timeLimit) {
-        this.timeLimit = timeLimit;
+    public void setTimeLimit(Integer timeLimit) {
+        if (timeLimit != null)
+            this.timeLimit = timeLimit;
     }
 
-    public int getMemoryLimit() {
-        return memoryLimit;
-    }
-
-    public void setMemoryLimit(int memoryLimit) {
-        this.memoryLimit = memoryLimit;
-    }
-
-    public boolean isTestsWellFormed() {
+    public Boolean getTestsWellFormed() {
         return testsWellFormed;
     }
 
-    public void setTestsWellFormed(boolean testsWellFormed) {
-        this.testsWellFormed = testsWellFormed;
+    public void setTestsWellFormed(Boolean testsWellFormed) {
+        if (testsWellFormed != null)
+            this.testsWellFormed = testsWellFormed;
+    }
+
+    public Integer getMemoryLimit() {
+        return memoryLimit;
+    }
+
+    public void setMemoryLimit(Integer memoryLimit) {
+        this.memoryLimit = memoryLimit;
+    }
+
+    public Boolean isTestsWellFormed() {
+        return testsWellFormed;
     }
 
     public Interaction getInteraction() {

@@ -1,9 +1,6 @@
-package eoj3.hypercube.problem;
-
-import org.springframework.data.annotation.ReadOnlyProperty;
+package eoj3.hypercube.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class Test {

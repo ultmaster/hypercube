@@ -35,9 +35,22 @@ export const setWorkingDir = (workingDir) => {
     // dispatch(requestPosts(subreddit))
 
     return client({
-      method: "POST",
+      method: "PUT",
       path: "/api/config",
       entity: {"workingDirectory": workingDir},
+      headers: {"Content-Type": "application/json"}
+    }).then(() => {
+      dispatch(updateAll());
+    })
+  }
+};
+
+export const updateDashboard = (problem) => {
+  return dispatch => {
+    return client({
+      method: "PUT",
+      path: "/api/dashboard",
+      entity: problem,
       headers: {"Content-Type": "application/json"}
     }).then(() => {
       dispatch(updateAll());

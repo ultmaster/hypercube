@@ -1,14 +1,10 @@
-package eoj3.hypercube;
-
-import eoj3.hypercube.problem.Problem;
-import eoj3.hypercube.problem.Test;
+package eoj3.hypercube.models;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.nio.file.Path;
 
 public class Configuration {
 
@@ -18,7 +14,7 @@ public class Configuration {
     public Configuration() {
         this.workingDirectory = System.getProperty("user.dir") + "/workspace";
         problem = new Problem();
-        loadOrNewProblem();
+        loadOrNew();
     }
 
     public String getWorkingDirectory() {
@@ -43,10 +39,10 @@ public class Configuration {
     }
 
     private File getProblemXmlFile() {
-        return new File(this.workingDirectory + "/problem.xml");
+        return new File(this.workingDirectory + "/models.xml");
     }
 
-    private void loadOrNewProblem() {
+    public void loadOrNew() {
         File file = getProblemXmlFile();
         try {
             if (file.exists()) {
@@ -60,10 +56,10 @@ public class Configuration {
         }
 
         problem = new Problem();
-        saveProblem();
+        this.save();
     }
 
-    private void saveProblem() {
+    public void save() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Problem.class);
             Marshaller marshaller = jaxbContext.createMarshaller();

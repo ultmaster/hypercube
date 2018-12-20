@@ -1,4 +1,4 @@
-package eoj3.hypercube;
+package eoj3.hypercube.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

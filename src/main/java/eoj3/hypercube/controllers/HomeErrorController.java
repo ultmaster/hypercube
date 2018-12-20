@@ -1,4 +1,8 @@
-package eoj3.hypercube;
+package eoj3.hypercube.controllers;
+
+public class HomeErrorController {
+
+}
 
 //@Controller
 //public class HomeErrorController implements ErrorController {

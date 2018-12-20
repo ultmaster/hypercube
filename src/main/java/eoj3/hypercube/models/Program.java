@@ -1,4 +1,4 @@
-package eoj3.hypercube.problem;
+package eoj3.hypercube.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
