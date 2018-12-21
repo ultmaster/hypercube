@@ -11,6 +11,7 @@ import { withStyles } from "@material-ui/core/styles";
 import {closeModal} from "../actions";
 import {ADD_TESTS_DIALOG} from "../components/AddTests";
 import AddTests from "../containers/AddTests";
+import {Link} from "react-router-dom";
 
 const styles = theme => ({
   fab: {
@@ -75,10 +76,9 @@ class Tests extends React.Component {
             </TableBody>
           </Table>
         </Paper>
-        <Fab color="secondary" className={classes.fab} onClick={this.props.dispatchAdd}>
+        <Fab color="secondary" className={classes.fab} component={props => <Link {...props} to="/tests/add" />}>
           <AddIcon />
         </Fab>
-        <AddTests />
       </React.Fragment>
     );
   }

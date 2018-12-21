@@ -17,7 +17,9 @@
     "redux-thunk": "latest",
     "redux-logger": "latest",
     "redux": "^3.5.2",
-    "redux-form": "latest"
+    "redux-form": "latest",
+    "react-dropzone": "latest",
+    "axios": "latest"
   },
   "scripts": {
     "watch": "webpack --watch -d",

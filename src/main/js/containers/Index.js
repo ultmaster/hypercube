@@ -28,6 +28,7 @@ import Tests from "./Tests";
 import {connect} from "react-redux";
 import {SET_WORKING_DIR_DIALOG} from "../components/SetWorkingDir";
 import {openModal} from "../actions";
+import AddTests from "./AddTests";
 
 const drawerWidth = 240;
 
@@ -188,8 +189,9 @@ class Index extends React.Component {
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer}/>
-            <Route path='/dashboard' component={Dashboard}/>
-            <Route path='/tests' component={Tests}/>
+            <Route exact path='/dashboard' component={Dashboard}/>
+            <Route exact path='/tests' component={Tests}/>
+            <Route exact path='/tests/add' component={AddTests}/>
           </main>
         </div>
       </HashRouter>
