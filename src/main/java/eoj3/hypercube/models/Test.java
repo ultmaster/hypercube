@@ -1,26 +1,29 @@
 package eoj3.hypercube.models;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Test {
-    private String inputPath;
-    private String outputPath;
 
-    public String getInputPath() {
-        return inputPath;
+    private String fileName;
+    private String description;
+
+    @XmlAttribute
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setInputPath(String inputPath) {
-        this.inputPath = inputPath;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
-    public String getOutputPath() {
-        return outputPath;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOutputPath(String outputPath) {
-        this.outputPath = outputPath;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getLength() {
