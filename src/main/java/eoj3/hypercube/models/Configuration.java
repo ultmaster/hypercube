@@ -18,8 +18,6 @@ public class Configuration {
 
     public Configuration() {
         this.workingDirectory = Paths.get(System.getProperty("user.dir"), "workspace").toString();
-        problem = new Problem();
-        loadOrNew();
     }
 
     public String getWorkingDirectory() {
@@ -27,34 +25,7 @@ public class Configuration {
     }
 
     public void setWorkingDirectory(String workingDirectory) {
-        File dir = new File(workingDirectory);
-        if (dir.exists() && dir.isDirectory()) {
-            this.workingDirectory = workingDirectory;
-        } else {
-            throw new RuntimeException("Illegal working directory");
-        }
-    }
-
-    private String getSubDirectory(String subDirectoryName) {
-        Path path = Paths.get(getWorkingDirectory(), subDirectoryName);
-        if (!path.toFile().exists())
-            path.toFile().mkdirs();
-        return path.toString();
-    }
-
-    @JsonIgnore
-    public String getTempDirectory() {
-        return getSubDirectory("tmp");
-    }
-
-    @JsonIgnore
-    public String getTempFilename(String ext) {
-        return Paths.get(getTempDirectory(), RandomStringUtils.randomAlphanumeric(8) + "." + ext).toString();
-    }
-
-    @JsonIgnore
-    public String getTestsDirectory() {
-        return getSubDirectory("tests");
+        this.workingDirectory = workingDirectory;
     }
 
     public Problem getProblem() {
@@ -69,20 +40,23 @@ public class Configuration {
         return new File(this.workingDirectory + "/problem.xml");
     }
 
-    public void loadOrNew() {
+    public boolean load() {
         File file = getProblemXmlFile();
         try {
             if (file.exists()) {
                 JAXBContext jaxbContext = JAXBContext.newInstance(Problem.class);
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
                 this.problem = (Problem) jaxbUnmarshaller.unmarshal(file);
-                return;
+                return true;
             }
         } catch (JAXBException e) {
-            e.printStackTrace();
+            return false;
         }
+        return false;
+    }
 
-        problem = new Problem();
+    public void create() {
+        this.problem = new Problem();
         this.save();
     }
 

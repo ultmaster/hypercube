@@ -21,11 +21,11 @@ import java.util.zip.ZipFile;
 
 @Service
 public class TestsAddService {
-    private Configuration configuration;
+    private ConfigurationService configurationService;
 
     @Autowired
-    public TestsAddService(Configuration configuration) {
-        this.configuration = configuration;
+    public TestsAddService(ConfigurationService configurationService) {
+        this.configurationService = configurationService;
     }
 
     static public class FormWrapper {
@@ -52,7 +52,7 @@ public class TestsAddService {
             return Character.isDigit(x) == Character.isDigit(y);
         }
 
-        public InputOutputPair(String inputName, String outputName) {
+        InputOutputPair(String inputName, String outputName) {
             this.inputName = inputName;
             this.outputName = outputName;
             orderSeq = new ArrayList<>();
@@ -72,15 +72,15 @@ public class TestsAddService {
             }
         }
 
-        public String getInputName() {
+        String getInputName() {
             return inputName;
         }
 
-        public String getOutputName() {
+        String getOutputName() {
             return outputName;
         }
 
-        public List getOrderSeq() {
+        List getOrderSeq() {
             return orderSeq;
         }
 
@@ -117,15 +117,15 @@ public class TestsAddService {
 
             try {
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get(configuration.getTempFilename("zip"));
+                Path path = Paths.get(configurationService.getTempFileName("zip"));
                 Files.write(path, bytes);
 
                 ZipFile zipFile = new ZipFile(path.toFile());
                 List<InputOutputPair> found = sortedEntries(zipFile);
                 List<String> names = getNextAvailableFileName(found.size());
                 Iterator<String> iter = names.iterator();
-                List<Test> tests = configuration.getProblem().getTests();
-                String parentDirectory = configuration.getTestsDirectory();
+                List<Test> tests = configurationService.getProblem().getTests();
+                String parentDirectory = configurationService.getTestsDirectory();
 
                 Map<String, String> unzipDestination = new HashMap<>();
                 for (InputOutputPair inputOutputPair : found) {
@@ -138,8 +138,7 @@ public class TestsAddService {
                     tests.add(test);
                 }
 
-                configuration.save();
-
+                configurationService.save();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -204,7 +203,7 @@ public class TestsAddService {
 
     private List<String> getNextAvailableFileName(int count) {
         List<String> found = new ArrayList<>();
-        String testsDirectory = configuration.getTestsDirectory();
+        String testsDirectory = configurationService.getTestsDirectory();
         Set<String> exists = new HashSet<>(Arrays.asList(Objects.requireNonNull(new File(testsDirectory).list())));
         for (int i = 1; ; ++i) {
             String token = String.format("%03d", i);

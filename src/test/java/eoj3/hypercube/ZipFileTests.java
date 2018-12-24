@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.*;
 
 
@@ -33,15 +34,21 @@ public class ZipFileTests {
     @Autowired
     TestsAddService testsAddService;
 
+    final private String workingDirectory;
+
+    public ZipFileTests() {
+        this.workingDirectory = System.getProperty("user.dir");
+    }
+
     @Before
     public void setUp() throws Exception {
-        FileUtils.cleanDirectory(new File("./workspace"));
+        FileUtils.cleanDirectory(new File(Paths.get(this.workingDirectory, "workspace").toString()));
     }
 
     @Test
     public void testZipFile() {
         try {
-            InputStream inputStream = new FileInputStream("./src/test/resources/zip-tests.zip");
+            InputStream inputStream = new FileInputStream(Paths.get(this.workingDirectory, "src", "test", "resources", "zip-tests.zip").toString());
             MockMultipartFile file = new MockMultipartFile("zip-tests", inputStream);
             TestsAddService.FormWrapper wrapper = new TestsAddService.FormWrapper();
             wrapper.setFiles(new MockMultipartFile[]{file});
