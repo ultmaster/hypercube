@@ -206,7 +206,7 @@ public class TestsAddService {
         String testsDirectory = configurationService.getTestsDirectory();
         Set<String> exists = new HashSet<>(Arrays.asList(Objects.requireNonNull(new File(testsDirectory).list())));
         for (int i = 1; ; ++i) {
-            String token = String.format("%03d", i);
+            String token = String.format("%d", i);
             if (!exists.contains(token)) found.add(token);
             if (found.size() == count) break;
         }

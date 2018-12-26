@@ -48,7 +48,7 @@ export class AddTests extends React.Component {
         console.log(percentCompleted);
       }
     };
-    Axios.post('/api/fileUpload', data, config)
+    Axios.post('/api/tests/add', data, config)
       .then(function (res) {
         console.log("then");
         console.log(res);

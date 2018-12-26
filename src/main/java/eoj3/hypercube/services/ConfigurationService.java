@@ -48,6 +48,7 @@ public class ConfigurationService {
 
     public void save() {
         this.configuration.save();
+        this.getMeta();
     }
 
     private void initialize() {

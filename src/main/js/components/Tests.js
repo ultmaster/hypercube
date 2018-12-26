@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 import {closeModal} from "../actions";
 import {ADD_TESTS_DIALOG} from "../components/AddTests";
 import AddTests from "../containers/AddTests";
@@ -21,30 +21,10 @@ const styles = theme => ({
   },
 });
 
-const mock = [];
-
-for (let i = 1; i <= 50; ++i) {
-  let a = Math.floor(Math.random() * 10);
-  let b = Math.floor(Math.random() * 20);
-  let inputData = a + " " + b;
-  mock.push({
-    seq: i,
-    inputPreview: inputData,
-    outputPreview: "" + (a + b),
-    length: inputData.length,
-    sample: i === 1
-  });
-}
-
 class Tests extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {"tests": mock};
-  }
 
   render() {
-    const { classes } = this.props;
-    console.log(this.props.dispatchAdd);
+    const {classes, tests} = this.props;
 
     return (
       <React.Fragment>
@@ -55,29 +35,35 @@ class Tests extends React.Component {
                 <TableCell numeric>#</TableCell>
                 <TableCell>Input</TableCell>
                 <TableCell>Output</TableCell>
-                <TableCell numeric>Length</TableCell>
-                <TableCell>Sample</TableCell>
+                <TableCell>Length</TableCell>
+                <TableCell>Description</TableCell>
+                {/*<TableCell>Sample</TableCell>*/}
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.tests.map(n => {
+              {tests.map((test) => {
                 return (
-                  <TableRow key={n.seq}>
+                  <TableRow key={test.fileName}>
                     <TableCell numeric component="th" scope="row">
-                      {n.seq}
+                      {parseInt(test.fileName)}
                     </TableCell>
-                    <TableCell><pre>{n.inputPreview}</pre></TableCell>
-                    <TableCell><pre>{n.outputPreview}</pre></TableCell>
-                    <TableCell numeric>{n.length}</TableCell>
-                    <TableCell>{n.sample ? "Yes" : "No"}</TableCell>
+                    <TableCell>
+                      <pre>{test.inputPreview}</pre>
+                    </TableCell>
+                    <TableCell>
+                      <pre>{test.outputPreview}</pre>
+                    </TableCell>
+                    <TableCell numeric>{test.length}</TableCell>
+                    <TableCell>{test.description}</TableCell>
+                    {/*<TableCell>{test.sample ? "Yes" : "No"}</TableCell>*/}
                   </TableRow>
                 );
               })}
             </TableBody>
           </Table>
         </Paper>
-        <Fab color="secondary" className={classes.fab} component={props => <Link {...props} to="/tests/add" />}>
-          <AddIcon />
+        <Fab color="secondary" className={classes.fab} component={props => <Link {...props} to="/tests/add"/>}>
+          <AddIcon/>
         </Fab>
       </React.Fragment>
     );

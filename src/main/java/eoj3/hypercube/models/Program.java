@@ -1,20 +1,22 @@
 package eoj3.hypercube.models;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @XmlRootElement
 public class Program {
-    private String path;
+    private String fileName;
     private String language;
     private List<String> tags;
 
-    public String getPath() {
-        return path;
+    @XmlAttribute
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getLanguage() {

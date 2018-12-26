@@ -1,14 +1,7 @@
 package eoj3.hypercube;
 
 import eoj3.hypercube.services.TestsAddService;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.jgrapht.Graph;
-import org.jgrapht.alg.interfaces.MatchingAlgorithm;
-import org.jgrapht.alg.matching.EdmondsMaximumCardinalityMatching;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.DefaultUndirectedGraph;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,10 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Paths;
-import java.util.*;
 
 
 @RunWith(SpringRunner.class)
